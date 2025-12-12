@@ -65,7 +65,7 @@ export function TrousseauChecklistClient({ checklist }: { checklist: ChecklistPa
 
   const handleToggleItem = (itemId: string) => {
     startTransition(() => applyOptimistic({ type: "toggle", itemId }))
-    toggleChecklistItemAction({ checklistId: checklist.id, itemId }).finally(() => router.refresh())
+    toggleChecklistItemAction({ checklistId: checklist.id, itemId })
   }
 
   const handleReset = () => {
@@ -74,7 +74,7 @@ export function TrousseauChecklistClient({ checklist }: { checklist: ChecklistPa
       items: section.items.map((item) => ({ ...item, completed: false })),
     }))
     startTransition(() => applyOptimistic({ type: "reset", sections: resetSections }))
-    resetChecklistAction({ checklistId: checklist.id }).finally(() => router.refresh())
+    resetChecklistAction({ checklistId: checklist.id })
   }
 
   const handleExport = () => {
@@ -103,14 +103,7 @@ export function TrousseauChecklistClient({ checklist }: { checklist: ChecklistPa
 
   return (
     <>
-      <section id="main-content">
-        <h1 className="text-3xl font-bold text-foreground mb-2 text-balance">Trousseau de maternité</h1>
-        <p className="text-muted-foreground text-pretty">
-          Préparez votre sac pour la maternité en cochant les articles au fur et à mesure.
-        </p>
-      </section>
-
-      <div className="rounded-3xl bg-gradient-to-br from-primary via-primary to-tertiary p-6 text-white shadow-xl">
+      <div className="rounded-3xl bg-linear-to-br from-primary via-primary to-tertiary p-6 text-white shadow-xl mb-4">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-2xl font-bold">{progress}%</h2>
@@ -125,7 +118,7 @@ export function TrousseauChecklistClient({ checklist }: { checklist: ChecklistPa
         <Progress value={progress} className="h-2 bg-white/20" />
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 mb-4">
         <Button onClick={handleExport} variant="outline" className="flex-1 bg-transparent rounded-xl" disabled={isPending}>
           <Download className="h-4 w-4 mr-2" />
           Exporter
