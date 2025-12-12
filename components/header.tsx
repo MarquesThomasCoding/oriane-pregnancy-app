@@ -15,11 +15,11 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full h-[70px] bg-background/80 backdrop-blur-xl border-b border-border/40">
+    <header className="sticky top-0 z-50 w-full h-17.5 bg-background/80 backdrop-blur-xl border-b border-border/40">
       <div className="container flex h-full items-center justify-between px-4 max-w-6xl mx-auto">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-tertiary to-secondary shadow-lg">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-linear-to-br from-primary via-tertiary to-secondary shadow-lg">
             <span className="text-xl font-bold text-white">O</span>
           </div>
           <span className="text-xl font-bold text-foreground hidden sm:inline">Oriane</span>

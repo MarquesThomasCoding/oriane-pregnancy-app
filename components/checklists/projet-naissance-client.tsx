@@ -49,7 +49,7 @@ export function ProjetNaissanceChecklistClient({ checklist }: { checklist: Check
 
   const handleToggleItem = (itemId: string) => {
     startTransition(() => applyOptimistic({ type: "toggle", itemId }))
-    toggleChecklistItemAction({ checklistId: checklist.id, itemId }).finally(() => router.refresh())
+    toggleChecklistItemAction({ checklistId: checklist.id, itemId })
   }
 
   const handleReset = () => {
@@ -58,7 +58,7 @@ export function ProjetNaissanceChecklistClient({ checklist }: { checklist: Check
       items: section.items.map((item) => ({ ...item, completed: false })),
     }))
     startTransition(() => applyOptimistic({ type: "reset", sections: resetSections }))
-    resetChecklistAction({ checklistId: checklist.id }).finally(() => router.refresh())
+    resetChecklistAction({ checklistId: checklist.id })
   }
 
   const handleExport = () => {

@@ -48,7 +48,7 @@ export function DocumentsChecklistClient({ checklist }: { checklist: ChecklistPa
 
   const handleToggleItem = (itemId: string) => {
     startTransition(() => applyOptimistic({ type: "toggle", itemId }))
-    toggleChecklistItemAction({ checklistId: checklist.id, itemId }).finally(() => router.refresh())
+    toggleChecklistItemAction({ checklistId: checklist.id, itemId })
   }
 
   const handleReset = () => {
@@ -57,7 +57,7 @@ export function DocumentsChecklistClient({ checklist }: { checklist: ChecklistPa
       items: section.items.map((item) => ({ ...item, completed: false })),
     }))
     startTransition(() => applyOptimistic({ type: "reset", sections: resetSections }))
-    resetChecklistAction({ checklistId: checklist.id }).finally(() => router.refresh())
+    resetChecklistAction({ checklistId: checklist.id })
   }
 
   const handleExport = () => {
