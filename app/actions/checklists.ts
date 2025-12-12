@@ -250,6 +250,16 @@ async function fetchChecklistById(id: string) {
 }
 
 async function ensureDemoUser(userId: string) {
+  // Check if user exists by ID first
+  const existingUser = await prisma.user.findUnique({
+    where: { id: userId },
+  })
+
+  if (existingUser) {
+    return existingUser
+  }
+
+  // Try to find by email or create new
   return prisma.user.upsert({
     where: { email: `${userId}@demo.local` },
     update: {},
@@ -258,7 +268,7 @@ async function ensureDemoUser(userId: string) {
       email: `${userId}@demo.local`,
       role: Role.MAMAN,
     },
-  });
+  })
 }
 
 async function bootstrapChecklist(type: ChecklistTypeInput, userId: string) {
