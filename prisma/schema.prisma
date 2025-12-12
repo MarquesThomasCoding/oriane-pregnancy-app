@@ -1,0 +1,232 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  MAMAN
+  ACCOMPAGNANT
+  ADMIN
+}
+
+enum ChecklistType {
+  TROUSSEAU
+  DOCUMENTS
+  PROJET_NAISSANCE
+}
+
+enum FoodStatus {
+  RECOMMANDE
+  A_EVITER
+  MODERE
+}
+
+enum BabyPhotoCategory {
+  ECHOGRAPHIE
+  VENTRE
+  MOMENT
+  AUTRE
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String?
+  role         Role     @default(MAMAN)
+
+  firstName    String?
+  lastName     String?
+  birthDate    DateTime?
+  language     String?  @default("fr")
+  theme        String?  @default("light")
+  highContrast Boolean? @default(false)
+  textToSpeech Boolean? @default(false)
+
+  pregnancyStart DateTime?
+  pregnancyDue   DateTime?
+  pregnancyRisk  String?   @default("normal")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  checklists       Checklist[]
+  appointments     Appointment[]
+  weightEntries    WeightEntry[]
+  symptomEntries   SymptomEntry[]
+  examEntries      ExamEntry[]
+  contractionLogs  ContractionEntry[]
+  babyEvolutions   BabyEvolution[]
+  albums           Album[]
+  memoryBooks      MemoryBook[]
+  maternities      Maternity[]
+}
+
+model Checklist {
+  id          String         @id @default(cuid())
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  type        ChecklistType
+  progression Float          @default(0)
+  lastUpdated DateTime       @default(now())
+  sections    ChecklistSection[]
+
+  @@unique([userId, type])
+}
+
+model ChecklistSection {
+  id          String         @id @default(cuid())
+  title       String
+  order       Int            @default(0)
+  checklist   Checklist      @relation(fields: [checklistId], references: [id], onDelete: Cascade)
+  checklistId String
+  items       ChecklistItem[]
+}
+
+model ChecklistItem {
+  id        String            @id @default(cuid())
+  label     String
+  description String?
+  checked   Boolean           @default(false)
+  custom    Boolean           @default(false)
+  section   ChecklistSection  @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  sectionId String
+}
+
+model Appointment {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  date        DateTime
+  kind        String
+  location    String?
+  doctor      String?
+  notes       String?
+  reminderSent Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WeightEntry {
+  id     String   @id @default(cuid())
+  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  date   DateTime
+  value  Float
+}
+
+model SymptomEntry {
+  id         String   @id @default(cuid())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  date       DateTime
+  description String
+  intensity  Int
+}
+
+model ExamEntry {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  date      DateTime
+  kind      String
+  result    String?
+  fileUrl   String?
+}
+
+model ContractionEntry {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  startedAt   DateTime
+  durationSec Int
+}
+
+model BabyEvolution {
+  id             String   @id @default(cuid())
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String
+  week           Int
+  weightEstimate Int?
+  heightEstimate Float?
+  note           String?
+}
+
+model Food {
+  id         String     @id @default(cuid())
+  name       String
+  category   String
+  status     FoodStatus
+  description String?
+  risks      String?
+  benefits   String?
+}
+
+model Maternity {
+  id                 String   @id @default(cuid())
+  user               User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId             String?
+  name               String
+  address            String?
+  phone              String?
+  visitingHours      String?
+  requiredDocuments  String?
+  tips               String?
+}
+
+model Faq {
+  id       String   @id @default(cuid())
+  question String
+  answer   String
+  tags     String?
+  language String   @default("fr")
+}
+
+model Resource {
+  id       String   @id @default(cuid())
+  title    String
+  kind     String
+  url      String
+  category String?
+  language String   @default("fr")
+}
+
+model Album {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  title       String
+  description String?
+  photos      Photo[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Photo {
+  id          String            @id @default(cuid())
+  album       Album             @relation(fields: [albumId], references: [id], onDelete: Cascade)
+  albumId     String
+  url         String
+  caption     String?
+  takenAt     DateTime?
+  category    BabyPhotoCategory @default(AUTRE)
+  location    String?
+  favorite    Boolean           @default(false)
+  inMemoryBook Boolean          @default(false)
+}
+
+model MemoryBook {
+  id            String   @id @default(cuid())
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        String
+  title         String
+  summary       String?
+  pdfUrl        String?
+  generatedAt   DateTime @default(now())
+  shareable     Boolean  @default(false)
+}
