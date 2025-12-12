@@ -38,10 +38,10 @@ export function MobileNav() {
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-50 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+      className="fixed inset-x-0 bottom-0 z-50 border-t bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60"
       style={{ paddingBottom: "max(env(safe-area-inset-bottom), 0px)" }}
     >
-      <div className="mx-auto flex min-h-[68px] max-w-screen-xl items-center justify-around px-3">
+      <div className="mx-auto flex min-h-17 max-w-7xl items-center justify-around px-3">
         {navItems.map((item) => {
           const [, firstSegment] = item.href.split("/")
           const isActive = pathname === item.href || (firstSegment && pathname?.startsWith(`/${firstSegment}`))
@@ -52,7 +52,7 @@ export function MobileNav() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex min-w-[52px] flex-col items-center justify-center gap-1 rounded-lg px-3 py-2 transition-colors",
+                "flex min-w-13 flex-col items-center justify-center gap-1 rounded-lg px-3 py-2 transition-colors",
                 "hover:bg-accent hover:text-accent-foreground",
                 "focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring",
                 isActive && "text-primary",
