@@ -60,7 +60,11 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-gradient-to-br from-secondary/30 via-background to-tertiary/20 flex items-center justify-center p-4">
       <Card className="w-full max-w-md p-6 md:p-8 shadow-xl">
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary to-tertiary mb-4">
+          <div
+            className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary to-tertiary mb-4"
+            role="img"
+            aria-label="Logo Oriane"
+            >
             <Baby className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
@@ -137,7 +141,7 @@ export default function RegisterPage() {
                       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         type="email"
-                        placeholder="votre@email.com"
+                        placeholder="Votre adresse email"
                         className="pl-10"
                         {...field}
                       />
@@ -159,7 +163,7 @@ export default function RegisterPage() {
                       <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         type="password"
-                        placeholder="••••••••"
+                        placeholder="Votre mot de passe (6 caractères minimum)"
                         className="pl-10"
                         {...field}
                       />
@@ -172,7 +176,7 @@ export default function RegisterPage() {
 
             <Button
               type="submit"
-              className="w-full"
+              className="w-full focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-black"
               disabled={isLoading}
             >
               {isLoading ? 'Création...' : 'Créer mon compte'}

@@ -49,7 +49,7 @@ export function AuthButton() {
   if (!user) {
     return (
       <Button asChild variant="outline" size="sm">
-        <a href="/login">Se connecter</a>
+        <a href="/login" aria-label="Se connecter">Se connecter</a>
       </Button>
     )
   }
@@ -57,7 +57,7 @@ export function AuthButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-11 w-11 rounded-full">
+        <Button variant="ghost" size="icon" className="h-11 w-11 rounded-full" aria-label="Menu utilisateur">
           <User className="h-5 w-5" />
         </Button>
       </DropdownMenuTrigger>
