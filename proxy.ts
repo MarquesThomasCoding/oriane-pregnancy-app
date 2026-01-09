@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server"
 
 // Liste des routes accessibles SANS être connecté.
 // NOTE : "/" n'est PAS ici, donc elle sera protégée par défaut.
-const publicRoutes = ["/nutrition", "/faq", "/login", "/signup"]
+const publicRoutes = ["/nutrition", "/faq", "/login", "/register"]
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
