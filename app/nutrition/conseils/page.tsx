@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { Header } from "@/components/header"
-import { MobileNav } from "@/components/mobile-nav"
 import { Card } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Lightbulb, Apple, Heart, Flame } from "lucide-react"
@@ -180,8 +179,6 @@ export default function ConseilsPage() {
           </p>
         </Card>
       </main>
-
-      <MobileNav />
     </div>
   )
 }

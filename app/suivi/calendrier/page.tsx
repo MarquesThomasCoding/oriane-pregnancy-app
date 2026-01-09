@@ -1,5 +1,4 @@
 import { Header } from "@/components/header"
-import { MobileNav } from "@/components/mobile-nav"
 import { getAppointmentsAction } from "@/app/actions/appointments"
 import { AppointmentsClient } from "@/components/appointments/appointments-client"
 
@@ -15,7 +14,6 @@ export default async function CalendrierPage() {
           <AppointmentsClient upcoming={upcoming} past={past} />
         </div>
       </div>
-      <MobileNav />
     </>
   )
 }

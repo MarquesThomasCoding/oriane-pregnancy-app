@@ -1,5 +1,4 @@
 import { Header } from "@/components/header"
-import { MobileNav } from "@/components/mobile-nav"
 import {
   ClipboardCheck,
   FileText,
@@ -264,8 +263,6 @@ export default function HomePage() {
           </Link>
         </section>
       </main>
-
-      <MobileNav />
     </div>
   )
 }
