@@ -39,6 +39,14 @@ export default async function HomePage() {
           Aller au contenu principal
         </a>
 
+        {/* Skip to navbar for accessibility */}
+        <a
+          href="#navbar"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg"
+        >
+          Aller à la barre de navigation principale
+        </a>
+
         <div className="flex justify-end -mb-4">
           <Button size="icon" variant="ghost" className="h-12 w-12 rounded-full bg-primary/10 hover:bg-primary/20">
             <Bell className="h-5 w-5 text-primary" />
