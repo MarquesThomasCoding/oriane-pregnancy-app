@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { Header } from "@/components/header"
-import { MobileNav } from "@/components/mobile-nav"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -147,8 +146,6 @@ export default function EvolutionBebePage() {
           </TabsContent>
         </Tabs>
       </main>
-
-      <MobileNav />
     </div>
   )
 }

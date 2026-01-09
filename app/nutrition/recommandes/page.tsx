@@ -1,7 +1,6 @@
 "use client"
 
 import { Header } from "@/components/header"
-import { MobileNav } from "@/components/mobile-nav"
 import { Card } from "@/components/ui/card"
 import { Apple, Milk, Fish, Egg, Carrot, Droplet, CheckCircle2 } from "lucide-react"
 
@@ -178,8 +177,6 @@ export default function RecommandesPage() {
           </p>
         </Card>
       </main>
-
-      <MobileNav />
     </div>
   )
 }

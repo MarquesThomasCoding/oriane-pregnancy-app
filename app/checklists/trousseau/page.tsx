@@ -1,6 +1,5 @@
 import { getChecklist } from "@/app/actions/checklists"
 import { Header } from "@/components/header"
-import { MobileNav } from "@/components/mobile-nav"
 import { TrousseauChecklistClient } from "@/components/checklists/trousseau-client"
 
 export default async function TrousseauPage() {
@@ -18,7 +17,6 @@ export default async function TrousseauPage() {
         </div>
         <TrousseauChecklistClient checklist={checklist} />
       </main>
-      <MobileNav />
     </div>
   )
 }

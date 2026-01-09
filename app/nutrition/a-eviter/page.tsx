@@ -1,7 +1,6 @@
 "use client"
 
 import { Header } from "@/components/header"
-import { MobileNav } from "@/components/mobile-nav"
 import { Card } from "@/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { XCircle, AlertTriangle, Wine, Fish, Beef } from "lucide-react"
@@ -163,8 +162,6 @@ export default function AEviterPage() {
           </p>
         </Card>
       </main>
-
-      <MobileNav />
     </div>
   )
 }

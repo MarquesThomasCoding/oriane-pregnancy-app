@@ -1,6 +1,5 @@
 import { getChecklist } from "@/app/actions/checklists"
 import { Header } from "@/components/header"
-import { MobileNav } from "@/components/mobile-nav"
 import { DocumentsChecklistClient } from "@/components/checklists/documents-client"
 
 export default async function DocumentsPage() {
@@ -12,7 +11,6 @@ export default async function DocumentsPage() {
       <main className="container mx-auto px-4 py-6 max-w-4xl space-y-6">
         <DocumentsChecklistClient checklist={checklist} />
       </main>
-      <MobileNav />
     </div>
   )
 }
