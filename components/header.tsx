@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Moon, Sun, Search } from "lucide-react"
 import { useState } from "react"
+import { AuthButton } from "@/components/auth-button"
 
 export function Header() {
   const [theme, setTheme] = useState<"light" | "dark">("light")
@@ -40,6 +41,8 @@ export function Header() {
           >
             {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
           </Button>
+
+          <AuthButton />
         </div>
       </div>
     </header>
