@@ -15,6 +15,7 @@ export async function loginAction(formData: FormData) {
   const rawData = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
+    callbackUrl: formData.get('callbackUrl') as string | null,
   }
 
   const result = loginSchema.safeParse(rawData)
@@ -56,7 +57,7 @@ export async function loginAction(formData: FormData) {
       maxAge: 60 * 60 * 24 * 7, // 7 jours
     })
 
-    redirect('/')
+    redirect(rawData.callbackUrl || '/')
   } catch (error) {
     // Next.js redirect() lance une exception spéciale, on ne doit pas la capturer
     if (error && typeof error === 'object' && 'digest' in error && 

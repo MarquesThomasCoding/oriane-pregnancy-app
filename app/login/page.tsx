@@ -19,12 +19,16 @@ import {
 import { Card } from '@/components/ui/card'
 import { Baby, Mail, Lock, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get("callbackUrl") || "/"
+  console.log("Callback URL:", callbackUrl)
 
   const form = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
@@ -41,6 +45,7 @@ export default function LoginPage() {
     const formData = new FormData()
     formData.append('email', data.email)
     formData.append('password', data.password)
+    formData.append('callbackUrl', callbackUrl)
 
     const result = await loginAction(formData)
 
@@ -48,7 +53,7 @@ export default function LoginPage() {
       setError(result.error)
       setIsLoading(false)
     } else {
-      router.push('/')
+      router.push(callbackUrl)
       router.refresh()
     }
   }
