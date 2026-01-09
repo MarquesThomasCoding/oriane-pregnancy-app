@@ -27,25 +27,26 @@ export default async function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-secondary/30 via-background to-tertiary/20 pb-20 md:pb-8">
+    <div className="min-h-screen bg-linear-to-br from-secondary/30 via-background to-tertiary/20 pb-20 md:pb-8">
+      {/* Skip to content for accessibility */}
+      <a
+        href="#main-content"
+        className="fixed top-0 left-0 z-100 sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg"
+      >
+        Aller au contenu principal
+      </a>
+
+      {/* Skip to navbar for accessibility */}
+      <a
+        href="#navbar"
+        className="fixed top-0 left-0 z-100 sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg"
+      >
+        Aller à la barre de navigation principale
+      </a>
+
       <Header />
 
       <main className="container px-4 py-6 space-y-6 max-w-6xl mx-auto">
-        {/* Skip to content for accessibility */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg"
-        >
-          Aller au contenu principal
-        </a>
-
-        {/* Skip to navbar for accessibility */}
-        <a
-          href="#navbar"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg"
-        >
-          Aller à la barre de navigation principale
-        </a>
 
         <div className="flex justify-end -mb-4">
           <Button size="icon" variant="ghost" className="h-12 w-12 rounded-full bg-primary/10 hover:bg-primary/20">
@@ -213,8 +214,8 @@ export default async function HomePage() {
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg md:text-xl font-bold text-foreground">Conseils du jour</h2>
-            <Link href="/faq" className="text-xs md:text-sm text-primary hover:text-primary/80 underline font-medium">
-              Voir la FAQ
+            <Link href="/faq" className="text-xs md:text-sm text-primary hover:text-primary/80 underline font-medium" aria-label="Voir la foire aux questions">
+              Voir la foire aux questions
             </Link>
           </div>
 
