@@ -26,11 +26,11 @@ const navItems = [
     label: "Nutrition",
     icon: Apple,
   },
-  {
-    href: "/infos/maternite",
-    label: "Infos",
-    icon: Info,
-  },
+  // {
+  //   href: "/infos/maternite",
+  //   label: "Infos",
+  //   icon: Info,
+  // },
 ]
 
 export function MobileNav() {
@@ -38,6 +38,7 @@ export function MobileNav() {
 
   return (
     <nav
+      id="navbar"
       className="fixed inset-x-0 bottom-0 z-50 border-t bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60"
       style={{ paddingBottom: "max(env(safe-area-inset-bottom), 0px)" }}
     >
