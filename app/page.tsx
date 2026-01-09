@@ -16,8 +16,16 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
+import { getCurrentUser } from "@/lib/auth"
+import { redirect } from "next/navigation"
 
-export default function HomePage() {
+export default async function HomePage() {
+  const user = await getCurrentUser()
+
+  if (!user) {
+    redirect("/login")
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-secondary/30 via-background to-tertiary/20 pb-20 md:pb-8">
       <Header />
@@ -54,7 +62,7 @@ export default function HomePage() {
                 id="welcome-heading"
                 className="text-2xl md:text-3xl font-bold text-foreground flex items-baseline gap-2"
               >
-                Bonjour, Sarah{" "}
+                Bonjour, {user.firstName}{" "}
                 <span className="text-2xl animate-wave inline-block" role="img" aria-label="Main qui fait coucou">
                   👋
                 </span>
