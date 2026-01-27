@@ -16,6 +16,10 @@ export async function createAppointmentAction(input: CreateAppointmentInput) {
   const parsed = createAppointmentSchema.parse(input)
   const userId = await getCurrentUserId()
 
+  if (!userId) {
+    throw new Error('Non authentifié')
+  }
+
   const appointment = await prisma.appointment.create({
     data: {
       userId,
@@ -34,6 +38,10 @@ export async function createAppointmentAction(input: CreateAppointmentInput) {
 export async function updateAppointmentAction(input: UpdateAppointmentInput) {
   const parsed = updateAppointmentSchema.parse(input)
   const userId = await getCurrentUserId()
+
+  if (!userId) {
+    throw new Error('Non authentifié')
+  }
 
   const appointment = await prisma.appointment.update({
     where: {
@@ -57,6 +65,10 @@ export async function deleteAppointmentAction(input: DeleteAppointmentInput) {
   const parsed = deleteAppointmentSchema.parse(input)
   const userId = await getCurrentUserId()
 
+  if (!userId) {
+    throw new Error('Non authentifié')
+  }
+
   await prisma.appointment.delete({
     where: {
       id: parsed.appointmentId,
@@ -70,6 +82,10 @@ export async function deleteAppointmentAction(input: DeleteAppointmentInput) {
 
 export async function getAppointmentsAction() {
   const userId = await getCurrentUserId()
+
+  if (!userId) {
+    return { upcoming: [], past: [] }
+  }
 
   const appointments = await prisma.appointment.findMany({
     where: { userId },
