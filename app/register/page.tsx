@@ -64,7 +64,7 @@ export default function RegisterPage() {
             className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary to-tertiary mb-4"
             role="img"
             aria-label="Logo Oriane"
-            >
+          >
             <Baby className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
@@ -187,7 +187,7 @@ export default function RegisterPage() {
         <div className="mt-6 text-center text-sm">
           <p className="text-muted-foreground">
             Déjà un compte ?{' '}
-            <Link href="/login" className="text-primary hover:underline font-medium">
+            <Link href="/login" prefetch={false} className="text-primary hover:underline font-medium">
               Se connecter
             </Link>
           </p>

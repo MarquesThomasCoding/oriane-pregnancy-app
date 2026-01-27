@@ -52,6 +52,7 @@ export function MobileNav() {
             <Link
               key={item.href}
               href={item.href}
+              prefetch={false}
               className={cn(
                 "flex min-w-13 flex-col items-center justify-center gap-1 rounded-lg px-3 py-2 transition-colors",
                 "hover:bg-accent hover:text-accent-foreground",

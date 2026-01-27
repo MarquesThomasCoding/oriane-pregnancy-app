@@ -12,7 +12,7 @@ interface ActionButtonProps {
 
 export function ActionButton({ href, icon: Icon, label, className }: ActionButtonProps) {
   return (
-    <Link href={href}>
+    <Link href={href} prefetch={false}>
       <Button
         variant="outline"
         className={cn(

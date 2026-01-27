@@ -169,7 +169,7 @@ export default async function HomePage() {
           </div>
 
           <div className="grid grid-cols-2 gap-2 md:gap-3 sm:grid-cols-4">
-            <Link href="/checklists/trousseau" className="group">
+            <Link href="/checklists/trousseau" prefetch={false} className="group">
               <div className="rounded-xl md:rounded-2xl bg-gradient-to-br from-success/10 to-success/5 p-4 md:p-6 hover-lift border border-success/20">
                 <div className="h-10 w-10 md:h-12 md:w-12 rounded-xl bg-success/20 flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform">
                   <ClipboardCheck className="h-5 w-5 md:h-6 md:w-6 text-success" />
@@ -179,7 +179,7 @@ export default async function HomePage() {
               </div>
             </Link>
 
-            <Link href="/checklists/documents" className="group">
+            <Link href="/checklists/documents" prefetch={false} className="group">
               <div className="rounded-xl md:rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 p-4 md:p-6 hover-lift border border-primary/20">
                 <div className="h-10 w-10 md:h-12 md:w-12 rounded-xl bg-primary/20 flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform">
                   <FileText className="h-5 w-5 md:h-6 md:w-6 text-primary" />
@@ -189,7 +189,7 @@ export default async function HomePage() {
               </div>
             </Link>
 
-            <Link href="/suivi/calendrier" className="group">
+            <Link href="/suivi/calendrier" prefetch={false} className="group">
               <div className="rounded-xl md:rounded-2xl bg-gradient-to-br from-tertiary/10 to-tertiary/5 p-4 md:p-6 hover-lift border border-tertiary/20">
                 <div className="h-10 w-10 md:h-12 md:w-12 rounded-xl bg-tertiary/20 flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform">
                   <Calendar className="h-5 w-5 md:h-6 md:w-6 text-tertiary" />
@@ -199,7 +199,7 @@ export default async function HomePage() {
               </div>
             </Link>
 
-            <Link href="/suivi/symptomes" className="group">
+            <Link href="/suivi/symptomes" prefetch={false} className="group">
               <div className="rounded-xl md:rounded-2xl bg-gradient-to-br from-warning/10 to-warning/5 p-4 md:p-6 hover-lift border border-warning/20">
                 <div className="h-10 w-10 md:h-12 md:w-12 rounded-xl bg-warning/20 flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform">
                   <Activity className="h-5 w-5 md:h-6 md:w-6 text-warning" />
@@ -214,7 +214,7 @@ export default async function HomePage() {
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg md:text-xl font-bold text-foreground">Conseils du jour</h2>
-            <Link href="/faq" className="text-xs md:text-sm text-primary hover:text-primary/80 underline font-medium" aria-label="Voir la foire aux questions">
+            <Link href="/faq" prefetch={false} className="text-xs md:text-sm text-primary hover:text-primary/80 underline font-medium" aria-label="Voir la foire aux questions">
               Voir la foire aux questions
             </Link>
           </div>
@@ -261,7 +261,7 @@ export default async function HomePage() {
         </section>
 
         <section>
-          <Link href="/suivi/evolution-bebe">
+          <Link href="/suivi/evolution-bebe" prefetch={false}>
             <div className="rounded-2xl md:rounded-3xl bg-gradient-to-br from-primary/5 via-secondary/10 to-tertiary/5 p-5 md:p-6 border-2 border-primary/20 hover-lift">
               <div className="flex items-center justify-between mb-4">
                 <div>
