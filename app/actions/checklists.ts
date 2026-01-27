@@ -350,6 +350,11 @@ async function recomputeProgress(checklistId: string) {
 export async function getChecklist(rawType: ChecklistTypeInput) {
   const type = checklistTypeSchema.parse(rawType)
   const userId = await getCurrentUserId()
+
+  if (!userId) {
+    throw new Error('Non authentifié')
+  }
+
   await ensureDemoUser(userId)
   const checklist = await bootstrapChecklist(type, userId)
   if (!checklist) {
@@ -361,6 +366,10 @@ export async function getChecklist(rawType: ChecklistTypeInput) {
 export async function toggleChecklistItemAction(rawInput: ToggleChecklistItemInput) {
   const input = toggleChecklistItemSchema.parse(rawInput)
   const userId = await getCurrentUserId()
+
+  if (!userId) {
+    throw new Error('Non authentifié')
+  }
 
   const item = await prisma.checklistItem.findFirst({
     where: { id: input.itemId, section: { checklist: { userId } } },
@@ -385,6 +394,10 @@ export async function toggleChecklistItemAction(rawInput: ToggleChecklistItemInp
 export async function resetChecklistAction(rawInput: ResetChecklistInput) {
   const input = resetChecklistSchema.parse(rawInput)
   const userId = await getCurrentUserId()
+
+  if (!userId) {
+    throw new Error('Non authentifié')
+  }
 
   const checklist = await guardOwnership(input.checklistId, userId)
 
