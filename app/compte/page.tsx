@@ -1,6 +1,3 @@
-"use client"
-
-import { useState } from "react"
 import {
   User,
   Calendar,
@@ -17,12 +14,21 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { PregnancyProfileForm } from "@/components/pregnancy-profile-form"
+import { getPregnancyProfile } from "@/app/actions/pregnancy-profile"
+import { getCurrentUser } from "@/lib/auth"
+import { redirect } from "next/navigation"
+import { CompteClientWrapper } from "@/components/compte-client-wrapper"
 
-export default function ComptePage() {
-  const [notifications, setNotifications] = useState(true)
-  const [darkMode, setDarkMode] = useState(false)
+export default async function ComptePage() {
+  const user = await getCurrentUser()
+
+  if (!user) {
+    redirect("/login?callbackUrl=/compte")
+  }
+
+  const pregnancyProfile = await getPregnancyProfile()
 
   return (
     <div className="min-h-screen pb-24 bg-gradient-to-b from-background to-secondary/20">
@@ -32,7 +38,7 @@ export default function ComptePage() {
       </div>
 
       <main id="main-content" className="max-w-4xl mx-auto px-4 py-6">
-        <Tabs defaultValue="profil" className="space-y-6">
+        <Tabs defaultValue="grossesse" className="space-y-6">
           <TabsList className="grid w-full grid-cols-3 h-auto gap-2 bg-transparent">
             <TabsTrigger
               value="profil"
@@ -64,7 +70,12 @@ export default function ComptePage() {
               <div className="space-y-4">
                 <div>
                   <Label htmlFor="name">Nom complet</Label>
-                  <Input id="name" placeholder="Votre nom" className="mt-1" defaultValue="Marie Dupont" />
+                  <Input
+                    id="name"
+                    placeholder="Votre nom"
+                    className="mt-1"
+                    defaultValue={`${user.firstName || ""} ${user.lastName || ""}`.trim() || undefined}
+                  />
                 </div>
                 <div>
                   <Label htmlFor="email">Email</Label>
@@ -73,17 +84,8 @@ export default function ComptePage() {
                     type="email"
                     placeholder="votre@email.com"
                     className="mt-1"
-                    defaultValue="marie.dupont@email.com"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="phone">Téléphone</Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="06 12 34 56 78"
-                    className="mt-1"
-                    defaultValue="06 12 34 56 78"
+                    defaultValue={user.email}
+                    disabled
                   />
                 </div>
                 <Button className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90">
@@ -112,123 +114,13 @@ export default function ComptePage() {
           <TabsContent value="grossesse" className="space-y-4">
             <div className="bg-gradient-to-br from-card to-card/50 border rounded-xl p-6 shadow-sm">
               <h3 className="text-lg font-semibold text-foreground mb-4">Informations grossesse</h3>
-              <div className="space-y-4">
-                <div>
-                  <Label htmlFor="dpa">Date Prévue d'Accouchement (DPA)</Label>
-                  <Input id="dpa" type="date" className="mt-1" defaultValue="2025-08-15" />
-                </div>
-                <div>
-                  <Label htmlFor="doctor">Gynécologue / Sage-femme</Label>
-                  <Input id="doctor" placeholder="Dr. Nom du praticien" className="mt-1" />
-                </div>
-                <div>
-                  <Label htmlFor="hospital">Maternité choisie</Label>
-                  <Input id="hospital" placeholder="Nom de la maternité" className="mt-1" />
-                </div>
-                <div>
-                  <Label htmlFor="blood-type">Groupe sanguin</Label>
-                  <Input id="blood-type" placeholder="A+, O-, etc." className="mt-1" />
-                </div>
-                <Button className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90">
-                  Mettre à jour
-                </Button>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-card to-card/50 border rounded-xl p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Prochains rendez-vous</h3>
-              <div className="space-y-3">
-                {[
-                  { date: "15 Jan 2025", type: "Consultation prénatale", doctor: "Dr. Martin" },
-                  { date: "22 Jan 2025", type: "Échographie T2", doctor: "Dr. Leroy" },
-                  { date: "5 Fév 2025", type: "Analyse de sang", doctor: "Laboratoire" },
-                ].map((rdv, idx) => (
-                  <div key={idx} className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg">
-                    <div className="flex items-center gap-3">
-                      <Calendar className="h-5 w-5 text-primary" />
-                      <div>
-                        <p className="font-medium text-foreground">{rdv.type}</p>
-                        <p className="text-sm text-muted-foreground">{rdv.doctor}</p>
-                      </div>
-                    </div>
-                    <span className="text-sm font-medium text-primary">{rdv.date}</span>
-                  </div>
-                ))}
-              </div>
+              <PregnancyProfileForm initialProfile={pregnancyProfile} />
             </div>
           </TabsContent>
 
           {/* Settings Tab */}
           <TabsContent value="parametres" className="space-y-4">
-            <div className="bg-gradient-to-br from-card to-card/50 border rounded-xl p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Notifications</h3>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Bell className="h-5 w-5 text-muted-foreground" />
-                    <div>
-                      <p className="font-medium text-foreground">Activer les notifications</p>
-                      <p className="text-sm text-muted-foreground">Recevoir des rappels et alertes</p>
-                    </div>
-                  </div>
-                  <Switch checked={notifications} onCheckedChange={setNotifications} />
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-card to-card/50 border rounded-xl p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Apparence</h3>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Moon className="h-5 w-5 text-muted-foreground" />
-                    <div>
-                      <p className="font-medium text-foreground">Mode sombre</p>
-                      <p className="text-sm text-muted-foreground">Thème sombre pour l'interface</p>
-                    </div>
-                  </div>
-                  <Switch checked={darkMode} onCheckedChange={setDarkMode} />
-                </div>
-                <div className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg cursor-pointer hover:bg-secondary/70 transition-colors">
-                  <div className="flex items-center gap-3">
-                    <Palette className="h-5 w-5 text-muted-foreground" />
-                    <p className="font-medium text-foreground">Personnaliser les couleurs</p>
-                  </div>
-                  <ChevronRight className="h-5 w-5 text-muted-foreground" />
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              {[
-                { icon: Lock, label: "Sécurité et confidentialité", badge: null },
-                { icon: HelpCircle, label: "Aide et support", badge: null },
-                { icon: FileText, label: "Conditions d'utilisation", badge: null },
-                { icon: FileText, label: "Politique de confidentialité", badge: null },
-              ].map((item, idx) => {
-                const Icon = item.icon
-                return (
-                  <button
-                    key={idx}
-                    className="w-full flex items-center justify-between p-4 bg-gradient-to-br from-card to-card/50 border rounded-xl hover:shadow-md transition-shadow"
-                  >
-                    <div className="flex items-center gap-3">
-                      <Icon className="h-5 w-5 text-muted-foreground" />
-                      <span className="font-medium text-foreground">{item.label}</span>
-                    </div>
-                    <ChevronRight className="h-5 w-5 text-muted-foreground" />
-                  </button>
-                )
-              })}
-            </div>
-
-            <Button
-              variant="outline"
-              className="w-full border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground bg-transparent"
-            >
-              <LogOut className="h-4 w-4 mr-2" />
-              Déconnexion
-            </Button>
+            <CompteClientWrapper />
           </TabsContent>
         </Tabs>
       </main>
