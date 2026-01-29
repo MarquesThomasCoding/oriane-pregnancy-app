@@ -1,7 +1,7 @@
 "use server"
 
 import { ChecklistType, Role, type ChecklistSection, type ChecklistItem } from "@prisma/client"
-import { revalidatePath } from "next/cache"
+import { revalidatePath, revalidateTag, unstable_cache } from "next/cache"
 
 import { prisma } from "@/lib/prisma"
 import { getCurrentUserId } from "@/lib/auth"
@@ -347,6 +347,28 @@ async function recomputeProgress(checklistId: string) {
   return progress
 }
 
+// Fonction interne pour récupérer la checklist (sera mise en cache)
+async function getChecklistData(type: ChecklistTypeInput, userId: string) {
+  await ensureDemoUser(userId)
+  const checklist = await bootstrapChecklist(type, userId)
+  if (!checklist) {
+    throw new Error("Impossible d'initialiser la checklist")
+  }
+  return toPayload(await fetchChecklistById(checklist.id))
+}
+
+// Créer une version cachée de la fonction
+const getCachedChecklist = unstable_cache(
+  async (type: ChecklistTypeInput, userId: string) => {
+    return getChecklistData(type, userId)
+  },
+  ["checklist"],
+  {
+    revalidate: 60, // Cache pendant 60 secondes
+    tags: ["checklist"],
+  }
+)
+
 export async function getChecklist(rawType: ChecklistTypeInput) {
   const type = checklistTypeSchema.parse(rawType)
   const userId = await getCurrentUserId()
@@ -355,12 +377,7 @@ export async function getChecklist(rawType: ChecklistTypeInput) {
     throw new Error('Non authentifié')
   }
 
-  await ensureDemoUser(userId)
-  const checklist = await bootstrapChecklist(type, userId)
-  if (!checklist) {
-    throw new Error("Impossible d'initialiser la checklist")
-  }
-  return toPayload(await fetchChecklistById(checklist.id))
+  return getCachedChecklist(type, userId)
 }
 
 export async function toggleChecklistItemAction(rawInput: ToggleChecklistItemInput) {
@@ -387,6 +404,7 @@ export async function toggleChecklistItemAction(rawInput: ToggleChecklistItemInp
 
   await recomputeProgress(item.section.checklistId)
   revalidatePath(toSlugFromEnum(item.section.checklist.type))
+  revalidateTag("checklist", "max") // Invalider le cache
 
   return toPayload(await fetchChecklistById(item.section.checklistId))
 }
@@ -408,6 +426,7 @@ export async function resetChecklistAction(rawInput: ResetChecklistInput) {
 
   await recomputeProgress(checklist.id)
   revalidatePath(toSlugFromEnum(checklist.type))
+  revalidateTag("checklist", "max") // Invalider le cache
 
   return toPayload(await fetchChecklistById(checklist.id))
 }
