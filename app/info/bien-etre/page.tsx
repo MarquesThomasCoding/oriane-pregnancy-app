@@ -162,7 +162,7 @@ export default function BienEtrePage() {
         <p className="text-muted-foreground mt-2 text-pretty">Prenez soin de vous pour une grossesse sereine</p>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 py-6">
+      <main id="main-content" className="max-w-4xl mx-auto px-4 py-6">
         <Tabs defaultValue="relaxation" className="space-y-6">
           <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 h-auto gap-2 bg-transparent">
             {wellnessCategories.map((category) => {
@@ -227,7 +227,7 @@ export default function BienEtrePage() {
             </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   )
 }

@@ -171,12 +171,14 @@ export function AppointmentsClient({ upcoming, past }: AppointmentsClientProps) 
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label htmlFor="kind">Type de rendez-vous</Label>
+              <Label htmlFor="kind">Type de rendez-vous <span aria-hidden="true" className="text-red-500">*</span></Label>
               <select
                 id="kind"
                 value={formData.kind}
                 onChange={(e) => setFormData({ ...formData, kind: e.target.value })}
                 className="w-full h-10 px-3 rounded-lg border bg-background text-foreground"
+                required
+                aria-required="true"
               >
                 {appointmentTypes.map((type) => (
                   <option key={type.value} value={type.value}>
@@ -187,7 +189,7 @@ export function AppointmentsClient({ upcoming, past }: AppointmentsClientProps) 
             </div>
 
             <div className="space-y-2">
-              <Label>Date</Label>
+              <Label htmlFor="date">Date <span aria-hidden="true" className="text-red-500">*</span></Label>
               <Calendar
                 mode="single"
                 selected={selectedDate}
@@ -197,32 +199,38 @@ export function AppointmentsClient({ upcoming, past }: AppointmentsClientProps) 
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="time">Heure</Label>
+              <Label htmlFor="time">Heure <span aria-hidden="true" className="text-red-500">*</span></Label>
               <Input
                 id="time"
                 type="time"
                 value={formData.time}
+                required
+                aria-required="true"
                 onChange={(e) => setFormData({ ...formData, time: e.target.value })}
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="location">Lieu</Label>
+              <Label htmlFor="location">Lieu <span aria-hidden="true" className="text-red-500">*</span></Label>
               <Input
                 id="location"
-                placeholder="Ex: Cabinet Dr. Martin"
+                placeholder="Exemple : Cabinet Dr. Martin"
                 value={formData.location}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                required
+                aria-required="true"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="doctor">Médecin / Sage-femme</Label>
+              <Label htmlFor="doctor">Médecin / Sage-femme <span aria-hidden="true" className="text-red-500">*</span></Label>
               <Input
                 id="doctor"
-                placeholder="Ex: Dr. Martin"
+                placeholder="Exemple : Dr. Martin"
                 value={formData.doctor}
                 onChange={(e) => setFormData({ ...formData, doctor: e.target.value })}
+                required
+                aria-required="true"
               />
             </div>
 
@@ -256,12 +264,14 @@ export function AppointmentsClient({ upcoming, past }: AppointmentsClientProps) 
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label htmlFor="edit-kind">Type de rendez-vous</Label>
+              <Label htmlFor="edit-kind">Type de rendez-vous <span aria-hidden="true" className="text-red-500">*</span></Label>
               <select
                 id="edit-kind"
                 value={formData.kind}
                 onChange={(e) => setFormData({ ...formData, kind: e.target.value })}
                 className="w-full h-10 px-3 rounded-lg border bg-background text-foreground"
+                required
+                aria-required="true"
               >
                 {appointmentTypes.map((type) => (
                   <option key={type.value} value={type.value}>
@@ -272,42 +282,50 @@ export function AppointmentsClient({ upcoming, past }: AppointmentsClientProps) 
             </div>
 
             <div className="space-y-2">
-              <Label>Date</Label>
+              <Label htmlFor="edit-date">Date <span aria-hidden="true" className="text-red-500">*</span></Label>
               <Calendar
                 mode="single"
                 selected={selectedDate}
                 onSelect={setSelectedDate}
                 className="rounded-md border"
+                required
+                aria-required="true"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="edit-time">Heure</Label>
+              <Label htmlFor="edit-time">Heure <span aria-hidden="true" className="text-red-500">*</span></Label>
               <Input
                 id="edit-time"
                 type="time"
                 value={formData.time}
                 onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+                required
+                aria-required="true"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="edit-location">Lieu</Label>
+              <Label htmlFor="edit-location">Lieu <span aria-hidden="true" className="text-red-500">*</span></Label>
               <Input
                 id="edit-location"
-                placeholder="Ex: Cabinet Dr. Martin"
+                placeholder="Exemple : Cabinet Dr. Martin"
                 value={formData.location}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                required
+                aria-required="true"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="edit-doctor">Médecin / Sage-femme</Label>
+              <Label htmlFor="edit-doctor">Médecin / Sage-femme <span aria-hidden="true" className="text-red-500">*</span></Label>
               <Input
                 id="edit-doctor"
-                placeholder="Ex: Dr. Martin"
+                placeholder="Exemple : Dr. Martin"
                 value={formData.doctor}
                 onChange={(e) => setFormData({ ...formData, doctor: e.target.value })}
+                required
+                aria-required="true"
               />
             </div>
 
@@ -382,6 +400,7 @@ export function AppointmentsClient({ upcoming, past }: AppointmentsClientProps) 
                   <Button
                     variant="ghost"
                     size="icon"
+                    aria-label='Modifier le rendez-vous'
                     onClick={() => openEditDialog(apt)}
                     className="h-8 w-8"
                   >
@@ -390,6 +409,7 @@ export function AppointmentsClient({ upcoming, past }: AppointmentsClientProps) 
                   <Button
                     variant="ghost"
                     size="icon"
+                    aria-label='Supprimer le rendez-vous'
                     onClick={() => handleDelete(apt.id)}
                     className="h-8 w-8 text-destructive"
                   >
@@ -444,6 +464,7 @@ export function AppointmentsClient({ upcoming, past }: AppointmentsClientProps) 
                 <Button
                   variant="ghost"
                   size="icon"
+                  aria-label="Supprimer le rendez-vous"
                   onClick={() => handleDelete(apt.id)}
                   className="h-8 w-8 text-destructive"
                 >

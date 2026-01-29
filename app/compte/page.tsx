@@ -31,7 +31,7 @@ export default function ComptePage() {
         <p className="text-muted-foreground mt-2 text-pretty">Gérez vos informations et préférences</p>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 py-6">
+      <main id="main-content" className="max-w-4xl mx-auto px-4 py-6">
         <Tabs defaultValue="profil" className="space-y-6">
           <TabsList className="grid w-full grid-cols-3 h-auto gap-2 bg-transparent">
             <TabsTrigger
@@ -231,7 +231,7 @@ export default function ComptePage() {
             </Button>
           </TabsContent>
         </Tabs>
-      </div>
+      </main>
     </div>
   )
 }

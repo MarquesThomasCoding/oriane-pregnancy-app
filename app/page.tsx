@@ -29,24 +29,24 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen bg-linear-to-br from-secondary/30 via-background to-tertiary/20 pb-20 md:pb-8">
       {/* Skip to content for accessibility */}
-      <a
+      {/* <a
         href="#main-content"
         className="fixed top-0 left-0 z-100 sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg"
       >
         Aller au contenu principal
-      </a>
+      </a> */}
 
       {/* Skip to navbar for accessibility */}
-      <a
+      {/* <a
         href="#navbar"
         className="fixed top-0 left-0 z-100 sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg"
       >
         Aller à la barre de navigation principale
-      </a>
+      </a> */}
 
       <Header />
 
-      <main className="container px-4 py-6 space-y-6 max-w-6xl mx-auto">
+      <main id="main-content" className="container px-4 py-6 space-y-6 max-w-6xl mx-auto">
 
         <div className="flex justify-end -mb-4">
           <Button size="icon" variant="ghost" className="h-12 w-12 rounded-full bg-primary/10 hover:bg-primary/20">
@@ -54,7 +54,7 @@ export default async function HomePage() {
           </Button>
         </div>
 
-        <section id="main-content" className="animate-slide-up" aria-labelledby="welcome-heading">
+        <section className="animate-slide-up" aria-labelledby="welcome-heading">
           <div className="flex items-center gap-4 md:gap-6">
             <div className="flex-shrink-0">
               <Image
@@ -134,7 +134,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section>
+        {/* <section>
           <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4">
             <Button className="rounded-full bg-primary text-white hover:bg-primary/90 shadow-sm text-sm whitespace-nowrap">
               Tout
@@ -158,7 +158,7 @@ export default async function HomePage() {
               Bien-être
             </Button>
           </div>
-        </section>
+        </section> */}
 
         <section>
           <div className="flex items-center justify-between mb-4">

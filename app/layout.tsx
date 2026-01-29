@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next"
 import { Inter, Plus_Jakarta_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { MobileNav } from "@/components/mobile-nav"
+import { FocusManager } from "@/components/focus-manager"
 import "./globals.css"
 
 const inter = Inter({
@@ -57,8 +58,17 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${plusJakarta.variable} font-sans antialiased min-h-screen pb-[calc(80px+env(safe-area-inset-bottom))]`}
       >
-        {children}
+        {/* Skip to content - premier élément focusable pour l'accessibilité */}
+        <a
+          href="#main-content"
+          className="fixed top-0 left-0 z-[100] sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg"
+        >
+          Aller au contenu principal
+        </a>
+        {/* Navigation en second pour l'ordre de tabulation */}
         <MobileNav />
+        <FocusManager />
+        {children}
         <Analytics />
       </body>
     </html>

@@ -7,6 +7,7 @@ import {
   ChevronRightIcon,
 } from 'lucide-react'
 import { DayButton, DayPicker, getDefaultClassNames } from 'react-day-picker'
+import { fr } from "react-day-picker/locale"
 
 import { cn } from '@/lib/utils'
 import { Button, buttonVariants } from '@/components/ui/button'
@@ -19,6 +20,7 @@ function Calendar({
   buttonVariant = 'ghost',
   formatters,
   components,
+  labels,
   ...props
 }: React.ComponentProps<typeof DayPicker> & {
   buttonVariant?: React.ComponentProps<typeof Button>['variant']
@@ -28,6 +30,23 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
+      locale={fr}
+      labels={{
+        labelDayButton: (date) =>
+          date.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
+        labelGrid: (date) =>
+          date.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' }),
+        labelGridcell: (date) =>
+          date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }),
+        labelMonthDropdown: () => 'Sélectionner le mois',
+        labelNav: () => 'Navigation du calendrier',
+        labelNext: () => 'Mois suivant',
+        labelPrevious: () => 'Mois précédent',
+        labelWeekNumber: (weekNumber) => `Semaine ${weekNumber}`,
+        labelWeekNumberHeader: () => 'Numéro de semaine',
+        labelYearDropdown: () => 'Sélectionner l\'année',
+        ...labels,
+      }}
       className={cn(
         'bg-background group/calendar p-3 [--cell-size:--spacing(8)] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent',
         String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
