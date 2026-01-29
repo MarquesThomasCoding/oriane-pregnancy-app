@@ -113,7 +113,7 @@ export default function ExercicesPage() {
         <p className="text-muted-foreground mt-2 text-pretty">Restez active et en forme pendant votre grossesse</p>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 py-6 space-y-6">
+      <main id="main-content" className="max-w-4xl mx-auto px-4 py-6 space-y-6">
         {/* Search */}
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
@@ -258,7 +258,7 @@ export default function ExercicesPage() {
             </li>
           </ul>
         </div>
-      </div>
+      </main>
     </div>
   )
 }

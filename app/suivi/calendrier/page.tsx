@@ -8,12 +8,12 @@ export default async function CalendrierPage() {
   return (
     <>
       <Header />
-      <div className="pb-20">
+      <main id="main-content" className="pb-20">
         <div className="p-4">
           <h1 className="text-2xl font-bold mb-4">Mes rendez-vous</h1>
           <AppointmentsClient upcoming={upcoming} past={past} />
         </div>
-      </div>
+      </main>
     </>
   )
 }

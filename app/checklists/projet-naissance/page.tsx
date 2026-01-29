@@ -8,7 +8,7 @@ export default async function ProjetNaissancePage() {
   return (
     <div className="min-h-screen bg-linear-to-b from-background to-muted/20 pb-20">
       <Header />
-      <main className="container mx-auto px-4 py-6 max-w-4xl space-y-6">
+      <main id="main-content" className="container mx-auto px-4 py-6 max-w-4xl space-y-6">
         <ProjetNaissanceChecklistClient checklist={checklist} />
       </main>
     </div>

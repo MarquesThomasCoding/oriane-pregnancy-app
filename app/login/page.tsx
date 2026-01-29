@@ -127,7 +127,7 @@ function LoginForm() {
 // 3. Le composant principal exporté contient la structure et le Suspense
 export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-secondary/30 via-background to-tertiary/20 flex items-center justify-center p-4">
+    <main id="main-content" className="min-h-screen bg-gradient-to-br from-secondary/30 via-background to-tertiary/20 flex items-center justify-center p-4">
       <Card className="w-full max-w-md p-6 md:p-8 shadow-xl">
         <div className="text-center mb-6">
           <div
@@ -159,6 +159,6 @@ export default function LoginPage() {
           </p>
         </div>
       </Card>
-    </div>
+    </main>
   )
 }
