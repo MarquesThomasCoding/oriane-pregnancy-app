@@ -42,21 +42,21 @@ export default async function ComptePage() {
           <TabsList className="grid w-full grid-cols-3 h-auto gap-2 bg-transparent">
             <TabsTrigger
               value="profil"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground py-3"
+              className="data-[state=active]:border-primary border-2 py-3"
             >
               <User className="h-4 w-4 mr-2" />
               Profil
             </TabsTrigger>
             <TabsTrigger
               value="grossesse"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground py-3"
+              className="data-[state=active]:border-primary border-2 py-3"
             >
               <Baby className="h-4 w-4 mr-2" />
               Grossesse
             </TabsTrigger>
             <TabsTrigger
               value="parametres"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground py-3"
+              className="data-[state=active]:border-primary border-2 py-3"
             >
               <Bell className="h-4 w-4 mr-2" />
               Réglages
@@ -86,9 +86,10 @@ export default async function ComptePage() {
                     className="mt-1"
                     defaultValue={user.email}
                     disabled
+                    aria-readonly
                   />
                 </div>
-                <Button className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90">
+                <Button className="w-full btn-primary hover:opacity-90">
                   Enregistrer les modifications
                 </Button>
               </div>
@@ -103,9 +104,9 @@ export default async function ComptePage() {
                 </div>
                 <div>
                   <Label htmlFor="emergency-phone">Téléphone</Label>
-                  <Input id="emergency-phone" type="tel" placeholder="06 12 34 56 78" className="mt-1" />
+                  <Input id="emergency-phone" type="tel" placeholder="Numéro de téléphone du contact" className="mt-1" />
                 </div>
-                <Button className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90">Enregistrer</Button>
+                <Button className="w-full btn-primary hover:opacity-90">Enregistrer</Button>
               </div>
             </div>
           </TabsContent>
