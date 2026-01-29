@@ -162,17 +162,17 @@ export function AppointmentsClient({ upcoming, past, pregnancyDue }: Appointment
         {/* Légende du calendrier */}
         <div className="mt-4 flex flex-wrap gap-4 text-xs text-muted-foreground px-2">
           <div className="flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full bg-primary/20" />
+            <div className="h-2 w-2 rounded-full bg-primary/20" aria-label="Rendez-vous" />
             <span>Rendez-vous</span>
           </div>
           {pregnancyDue && (
             <div className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-tertiary" />
+              <div className="h-2 w-2 rounded-full bg-tertiary" aria-label="Terme prévu" />
               <span>Terme prévu ({new Date(pregnancyDue).toLocaleDateString()})</span>
             </div>
           )}
           <div className="flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full bg-accent" />
+            <div className="h-2 w-2 rounded-full bg-accent" aria-label="Aujourd'hui" />
             <span>Aujourd'hui</span>
           </div>
         </div>
