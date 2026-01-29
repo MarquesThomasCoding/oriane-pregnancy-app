@@ -5,14 +5,21 @@ import { Button } from "@/components/ui/button"
 import { Moon, Sun, Search } from "lucide-react"
 import { useState } from "react"
 import { AuthButton } from "@/components/auth-button"
+import { useCompactMode } from "@/hooks/use-compact-mode"
 
 export function Header() {
   const [theme, setTheme] = useState<"light" | "dark">("light")
+  const isCompactMode = useCompactMode()
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light"
     setTheme(newTheme)
     document.documentElement.classList.toggle("dark")
+  }
+
+  // En mode compact, le header est intégré dans la MobileNav
+  if (isCompactMode) {
+    return null
   }
 
   return (
