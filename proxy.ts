@@ -35,5 +35,5 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   // Le matcher exclut les fichiers statiques pour ne pas ralentir le chargement des images/assets
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\.png|.*\\.svg).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|manifest.webmanifest|.*\\.png|.*\\.svg).*)"],
 }
