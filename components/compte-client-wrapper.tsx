@@ -36,15 +36,15 @@ export function CompteClientWrapper() {
             <div className="bg-gradient-to-br from-card to-card/50 border rounded-xl p-6 shadow-sm">
                 <h3 className="text-lg font-semibold text-foreground mb-4">Notifications</h3>
                 <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                            <Bell className="h-5 w-5 text-muted-foreground" />
-                            <div>
-                                <p className="font-medium text-foreground">Activer les notifications</p>
-                                <p className="text-sm text-muted-foreground">Recevoir des rappels et alertes</p>
+                    <div className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-3 min-w-0">
+                            <Bell className="h-5 w-5 text-muted-foreground shrink-0" />
+                            <div className="min-w-0">
+                                <p className="font-medium text-foreground truncate">Activer les notifications</p>
+                                <p className="text-sm text-muted-foreground truncate">Recevoir des rappels et alertes</p>
                             </div>
                         </div>
-                        <Switch checked={notifications} onCheckedChange={setNotifications} />
+                        <Switch checked={notifications} onCheckedChange={setNotifications} className="shrink-0" />
                     </div>
                 </div>
             </div>
@@ -52,15 +52,15 @@ export function CompteClientWrapper() {
             <div className="bg-gradient-to-br from-card to-card/50 border rounded-xl p-6 shadow-sm">
                 <h3 className="text-lg font-semibold text-foreground mb-4">Apparence</h3>
                 <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                            <Moon className="h-5 w-5 text-muted-foreground" />
-                            <div>
-                                <p className="font-medium text-foreground">Mode sombre</p>
-                                <p className="text-sm text-muted-foreground">Thème sombre pour l'interface</p>
+                    <div className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-3 min-w-0">
+                            <Moon className="h-5 w-5 text-muted-foreground shrink-0" />
+                            <div className="min-w-0">
+                                <p className="font-medium text-foreground truncate">Mode sombre</p>
+                                <p className="text-sm text-muted-foreground truncate">Thème sombre pour l'interface</p>
                             </div>
                         </div>
-                        <Switch checked={darkMode} onCheckedChange={toggleDarkMode} />
+                        <Switch checked={darkMode} onCheckedChange={toggleDarkMode} className="shrink-0" />
                     </div>
                     <div className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg cursor-not-allowed hover:bg-secondary/70 transition-colors">
                         <div className="flex items-center gap-3">

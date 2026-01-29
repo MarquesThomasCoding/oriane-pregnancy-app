@@ -100,12 +100,14 @@ export function PregnancyProfileForm({ initialProfile }: Props) {
             {/* Affichage de la progression si disponible */}
             {progress && (
                 <div className="bg-gradient-to-r from-primary/10 via-accent/10 to-tertiary/10 border rounded-xl p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                        <Baby className="h-6 w-6 text-primary" />
-                        <h4 className="text-lg font-semibold text-foreground">
-                            Semaine {progress.weeksElapsed} + {progress.daysInCurrentWeek} jour{progress.daysInCurrentWeek > 1 ? "s" : ""}
-                        </h4>
-                        <span className="ml-auto text-sm font-medium text-muted-foreground">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+                        <div className="flex items-center gap-2">
+                            <Baby className="h-6 w-6 text-primary shrink-0" />
+                            <h4 className="text-lg font-semibold text-foreground">
+                                Semaine {progress.weeksElapsed} + {progress.daysInCurrentWeek} jour{progress.daysInCurrentWeek > 1 ? "s" : ""}
+                            </h4>
+                        </div>
+                        <span className="sm:ml-auto text-sm font-medium text-muted-foreground">
                             Trimestre {progress.trimester}
                         </span>
                     </div>
@@ -151,13 +153,13 @@ export function PregnancyProfileForm({ initialProfile }: Props) {
                     <RadioGroup
                         value={dateMode}
                         onValueChange={(v) => setDateMode(v as "conception" | "due")}
-                        className="grid grid-cols-2 gap-3"
+                        className="grid grid-cols-1 sm:grid-cols-2 gap-3"
                     >
                         <Label
                             htmlFor="mode-conception"
                             className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${dateMode === "conception"
-                                    ? "border-primary bg-primary/5"
-                                    : "border-border hover:border-primary/50"
+                                ? "border-primary bg-primary/5"
+                                : "border-border hover:border-primary/50"
                                 }`}
                         >
                             <RadioGroupItem value="conception" id="mode-conception" />
@@ -169,8 +171,8 @@ export function PregnancyProfileForm({ initialProfile }: Props) {
                         <Label
                             htmlFor="mode-due"
                             className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${dateMode === "due"
-                                    ? "border-primary bg-primary/5"
-                                    : "border-border hover:border-primary/50"
+                                ? "border-primary bg-primary/5"
+                                : "border-border hover:border-primary/50"
                                 }`}
                         >
                             <RadioGroupItem value="due" id="mode-due" />
