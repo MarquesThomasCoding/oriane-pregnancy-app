@@ -90,7 +90,7 @@ export default function RegisterPage() {
                 name="firstName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Prénom</FormLabel>
+                    <FormLabel>Prénom <span className="text-destructive">*</span></FormLabel>
                     <FormControl>
                       <div className="relative">
                         <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -99,6 +99,8 @@ export default function RegisterPage() {
                           placeholder="Prénom"
                           className="pl-10"
                           {...field}
+                          required
+                          aria-required="true"
                         />
                       </div>
                     </FormControl>
@@ -112,7 +114,7 @@ export default function RegisterPage() {
                 name="lastName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Nom</FormLabel>
+                    <FormLabel>Nom <span className="text-destructive">*</span></FormLabel>
                     <FormControl>
                       <div className="relative">
                         <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -121,6 +123,8 @@ export default function RegisterPage() {
                           placeholder="Nom"
                           className="pl-10"
                           {...field}
+                          required
+                          aria-required="true"
                         />
                       </div>
                     </FormControl>
@@ -135,7 +139,7 @@ export default function RegisterPage() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Email <span className="text-destructive">*</span></FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -143,6 +147,8 @@ export default function RegisterPage() {
                         type="email"
                         placeholder="Votre adresse email"
                         className="pl-10"
+                        required
+                        aria-required="true"
                         {...field}
                       />
                     </div>
@@ -157,7 +163,7 @@ export default function RegisterPage() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Mot de passe</FormLabel>
+                  <FormLabel>Mot de passe <span className="text-destructive">*</span></FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -165,6 +171,8 @@ export default function RegisterPage() {
                         type="password"
                         placeholder="Votre mot de passe (6 caractères minimum)"
                         className="pl-10"
+                        required
+                        aria-required="true"
                         {...field}
                       />
                     </div>
