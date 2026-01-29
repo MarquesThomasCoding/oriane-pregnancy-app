@@ -62,10 +62,10 @@ export function CompteClientWrapper() {
                         </div>
                         <Switch checked={darkMode} onCheckedChange={toggleDarkMode} />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg cursor-pointer hover:bg-secondary/70 transition-colors">
+                    <div className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg cursor-not-allowed hover:bg-secondary/70 transition-colors">
                         <div className="flex items-center gap-3">
                             <Palette className="h-5 w-5 text-muted-foreground" />
-                            <p className="font-medium text-foreground">Personnaliser les couleurs</p>
+                            <p className="font-medium text-muted-foreground">Personnaliser les couleurs</p>
                         </div>
                         <ChevronRight className="h-5 w-5 text-muted-foreground" />
                     </div>
@@ -83,11 +83,13 @@ export function CompteClientWrapper() {
                     return (
                         <button
                             key={idx}
-                            className="w-full flex items-center justify-between p-4 bg-gradient-to-br from-card to-card/50 border rounded-xl hover:shadow-md transition-shadow"
+                            className="w-full flex items-center justify-between p-4 bg-gradient-to-br from-card to-card/50 border rounded-xl hover:shadow-md transition-shadow cursor-not-allowed"
+                            disabled
+                            aria-disabled
                         >
                             <div className="flex items-center gap-3">
                                 <Icon className="h-5 w-5 text-muted-foreground" />
-                                <span className="font-medium text-foreground">{item.label}</span>
+                                <span className="font-medium text-muted-foreground">{item.label}</span>
                             </div>
                             <ChevronRight className="h-5 w-5 text-muted-foreground" />
                         </button>

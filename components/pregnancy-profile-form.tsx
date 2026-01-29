@@ -233,7 +233,7 @@ export function PregnancyProfileForm({ initialProfile }: Props) {
                 <div className="flex gap-3">
                     <Button
                         type="submit"
-                        className="flex-1 bg-gradient-to-r from-primary to-accent hover:opacity-90"
+                        className="flex-1 btn-primary hover:opacity-90"
                         disabled={isPending}
                     >
                         {isPending ? "Enregistrement..." : "Enregistrer"}
@@ -244,7 +244,7 @@ export function PregnancyProfileForm({ initialProfile }: Props) {
                             variant="outline"
                             onClick={handleReset}
                             disabled={isPending}
-                            className="gap-2"
+                            className="gap-2 btn-outline"
                         >
                             <RefreshCw className="h-4 w-4" />
                             Réinitialiser

@@ -10,6 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import Link from 'next/link'
 
 interface UserData {
   email: string
@@ -62,14 +63,16 @@ export function AuthButton() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
-        <div className="px-2 py-1.5">
-          <p className="text-sm font-medium">
-            {user.firstName || user.lastName 
-              ? `${user.firstName || ''} ${user.lastName || ''}`.trim()
-              : 'Utilisateur'}
-          </p>
-          <p className="text-xs text-muted-foreground">{user.email}</p>
-        </div>
+        <Link href="/compte" className="flex items-center gap-2 px-2 py-1.5 hover:bg-muted rounded-md">
+          <div className="px-2 py-1.5">
+            <p className="text-sm font-medium">
+              {user.firstName || user.lastName
+                ? `${user.firstName || ''} ${user.lastName || ''}`.trim()
+                : 'Utilisateur'}
+            </p>
+            <p className="text-xs text-muted-foreground">{user.email}</p>
+          </div>
+        </Link>
         <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
           <LogOut className="mr-2 h-4 w-4" />
           Déconnexion
