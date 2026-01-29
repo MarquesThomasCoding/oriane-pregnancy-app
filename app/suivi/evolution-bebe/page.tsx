@@ -19,7 +19,7 @@ export default async function EvolutionBebePage() {
     <div className="min-h-screen pt-14 2sm:pt-0 pb-20 md:pb-8">
       <Header />
 
-      <main className="container px-4 py-6 space-y-6">
+      <main className="container px-4 py-6 space-y-6 max-w-6xl mx-auto">
         {hasPregnancyData ? (
           <EvolutionBebeClient initialWeek={initialWeek} />
         ) : (
