@@ -6,6 +6,7 @@ import { Moon, Sun, Search } from "lucide-react"
 import { useState } from "react"
 import { AuthButton } from "@/components/auth-button"
 import { useCompactMode } from "@/hooks/use-compact-mode"
+import Image from "next/image"
 
 export function Header() {
   const [theme, setTheme] = useState<"light" | "dark">("light")
@@ -27,9 +28,7 @@ export function Header() {
       <div className="container flex h-full items-center justify-between px-4 max-w-6xl mx-auto">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-linear-to-br from-primary via-tertiary to-secondary shadow-lg">
-            <span className="text-xl font-bold text-white">O</span>
-          </div>
+            <Image src="/favicon-96x96.png" alt="Oriane Logo" width={44} height={44} className="rounded-2xl" />
           <span className="text-xl font-bold text-foreground hidden sm:inline">Oriane</span>
         </Link>
 
