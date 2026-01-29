@@ -206,9 +206,9 @@ export default async function HomePage() {
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg md:text-xl font-bold text-foreground">Actions rapides</h2>
-            <Button variant="ghost" size="sm" className="text-primary hover:text-primary/80 text-xs md:text-sm">
+            {/* <Button variant="ghost" size="sm" className="text-primary hover:text-primary/80 text-xs md:text-sm">
               Voir tout <ArrowRight className="ml-1 h-3 w-3 md:h-4 md:w-4" />
-            </Button>
+            </Button> */}
           </div>
 
           <div className="grid grid-cols-2 gap-2 md:gap-3 sm:grid-cols-4">
