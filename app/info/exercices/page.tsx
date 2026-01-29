@@ -107,7 +107,7 @@ export default function ExercicesPage() {
   })
 
   return (
-    <div className="min-h-screen pb-24 bg-gradient-to-b from-background to-secondary/20">
+    <div className="min-h-screen pb-24 bg-gradient-to-b from-background to-secondary/20 pt-14 2sm:pt-0">
       <div className="bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 p-6 border-b">
         <h1 className="text-3xl font-bold text-foreground text-balance">Exercices Prénataux</h1>
         <p className="text-muted-foreground mt-2 text-pretty">Restez active et en forme pendant votre grossesse</p>

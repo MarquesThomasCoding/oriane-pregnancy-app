@@ -156,7 +156,7 @@ const wellnessCategories = [
 
 export default function BienEtrePage() {
   return (
-    <div className="min-h-screen pb-24 bg-gradient-to-b from-background to-secondary/20">
+    <div className="min-h-screen pt-14 2sm:pt-0 pb-24 bg-gradient-to-b from-background to-secondary/20">
       <div className="bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 p-6 border-b">
         <h1 className="text-3xl font-bold text-foreground text-balance">Bien-être</h1>
         <p className="text-muted-foreground mt-2 text-pretty">Prenez soin de vous pour une grossesse sereine</p>

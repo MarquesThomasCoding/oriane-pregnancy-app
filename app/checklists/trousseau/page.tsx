@@ -6,7 +6,7 @@ export default async function TrousseauPage() {
   const checklist = await getChecklist("trousseau")
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-background to-muted/20 pb-20">
+    <div className="min-h-screen bg-linear-to-b from-background to-muted/20 pt-14 2sm:pt-0 pb-20">
       <Header />
       <main id="main-content" className="container mx-auto px-4 py-6 max-w-4xl">
         <div className="mb-6">

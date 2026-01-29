@@ -27,7 +27,7 @@ export default async function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-secondary/30 via-background to-tertiary/20 pb-20 md:pb-8">
+    <div className="min-h-screen bg-linear-to-br from-secondary/30 via-background to-tertiary/20 pt-14 2sm:pt-0 pb-20 md:pb-8">
       {/* Skip to content for accessibility */}
       {/* <a
         href="#main-content"
