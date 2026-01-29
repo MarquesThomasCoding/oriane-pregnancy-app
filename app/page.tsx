@@ -17,13 +17,32 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import { getCurrentUser } from "@/lib/auth"
+import { getPregnancyProfile } from "@/app/actions/pregnancy-profile"
 import { redirect } from "next/navigation"
 
 export default async function HomePage() {
   const user = await getCurrentUser()
+  const profile = await getPregnancyProfile()
 
   if (!user) {
     redirect("/login")
+  }
+
+  const { progress } = profile || {}
+  const hasPregnancyData = !!progress
+
+  const getGreeting = () => {
+    const hour = new Date().getHours()
+    if (hour < 12) return "Bonjour"
+    if (hour < 18) return "Bonne après-midi"
+    return "Bonsoir"
+  }
+
+  const getEmoji = () => {
+    if (!hasPregnancyData) return "👋"
+    if (progress!.trimester === 1) return "🌱"
+    if (progress!.trimester === 2) return "🤰"
+    return "🎉"
   }
 
   return (
@@ -71,12 +90,14 @@ export default async function HomePage() {
                 id="welcome-heading"
                 className="text-2xl md:text-3xl font-bold text-foreground flex items-baseline gap-2"
               >
-                Bonjour, {user.firstName}{" "}
-                <span className="text-2xl animate-wave inline-block" role="img" aria-label="Main qui fait coucou">
-                  👋
+                {getGreeting()}, {user.firstName}{" "}
+                <span className="text-2xl animate-wave inline-block" role="img" aria-label="Emoji de bienvenue">
+                  {getEmoji()}
                 </span>
               </h1>
-              <p className="text-sm md:text-base text-muted-foreground mt-1">Bon après-midi</p>
+              <p className="text-sm md:text-base text-muted-foreground mt-1">
+                {hasPregnancyData ? `Semaine ${progress!.weeksElapsed} de grossesse` : "Bienvenue sur Oriane"}
+              </p>
             </div>
           </div>
         </section>
@@ -85,19 +106,41 @@ export default async function HomePage() {
           <div className="rounded-3xl bg-gradient-to-br from-primary via-primary to-tertiary p-6 md:p-8 text-white shadow-xl hover-lift overflow-hidden relative">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
             <div className="relative z-10">
-              <p className="text-white/90 text-sm mb-1">Votre grossesse</p>
-              <h2 className="text-2xl md:text-3xl font-bold">Semaine 24</h2>
-              <p className="text-white/80 text-sm mt-1">Trimestre 2 • 16 semaines restantes</p>
+              {hasPregnancyData ? (
+                <>
+                  <p className="text-white/90 text-sm mb-1">Votre grossesse</p>
+                  <h2 className="text-2xl md:text-3xl font-bold">Semaine {progress!.weeksElapsed}</h2>
+                  <p className="text-white/80 text-sm mt-1">
+                    Trimestre {progress!.trimester} • {progress!.daysRemaining} jours restants
+                  </p>
 
-              <div className="space-y-2 mt-6">
-                <div className="flex justify-between text-sm">
-                  <span>Progression globale</span>
-                  <span className="font-semibold">60%</span>
-                </div>
-                <div className="h-2 bg-white/20 rounded-full overflow-hidden">
-                  <div className="h-full bg-white rounded-full w-[60%] shimmer" />
-                </div>
-              </div>
+                  <div className="space-y-2 mt-6">
+                    <div className="flex justify-between text-sm">
+                      <span>Progression globale</span>
+                      <span className="font-semibold">{progress!.progressPercent}%</span>
+                    </div>
+                    <div className="h-2 bg-white/20 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-white rounded-full transition-all duration-1000 ease-out shimmer"
+                        style={{ width: `${progress!.progressPercent}%` }}
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className="text-white/90 text-sm mb-1">Commencez votre suivi</p>
+                  <h2 className="text-2xl md:text-3xl font-bold mb-4">Configurez votre grossesse</h2>
+                  <p className="text-white/80 text-sm mb-6">
+                    Renseignez votre date de conception ou terme prévu pour obtenir un suivi personnalisé.
+                  </p>
+                  <Link href="/compte">
+                    <Button variant="secondary" className="w-full sm:w-auto text-primary font-semibold">
+                      Configurer maintenant
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </section>
@@ -261,23 +304,37 @@ export default async function HomePage() {
         </section>
 
         <section>
-          <Link href="/suivi/evolution-bebe" prefetch={false}>
-            <div className="rounded-2xl md:rounded-3xl bg-gradient-to-br from-primary/5 via-secondary/10 to-tertiary/5 p-5 md:p-6 border-2 border-primary/20 hover-lift">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h3 className="text-base md:text-lg font-bold text-foreground">Développement de bébé</h3>
-                  <p className="text-xs md:text-sm text-muted-foreground">Semaine 24</p>
+          {hasPregnancyData ? (
+            <Link href="/suivi/evolution-bebe" prefetch={false}>
+              <div className="rounded-2xl md:rounded-3xl bg-gradient-to-br from-primary/5 via-secondary/10 to-tertiary/5 p-5 md:p-6 border-2 border-primary/20 hover-lift">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 className="text-base md:text-lg font-bold text-foreground">Développement de bébé</h3>
+                    <p className="text-xs md:text-sm text-muted-foreground">Semaine {progress!.weeksElapsed}</p>
+                  </div>
+                  <div className="h-12 w-12 md:h-14 md:w-14 rounded-full bg-gradient-to-br from-primary to-tertiary flex items-center justify-center animate-float">
+                    <Baby className="h-6 w-6 md:h-7 md:w-7 text-white" />
+                  </div>
                 </div>
-                <div className="h-12 w-12 md:h-14 md:w-14 rounded-full bg-gradient-to-br from-primary to-tertiary flex items-center justify-center animate-float">
-                  <Baby className="h-6 w-6 md:h-7 md:w-7 text-white" />
+                <p className="text-xs md:text-sm text-foreground/80 mb-3">
+                  Découvrez l'évolution de votre bébé semaine par semaine.
+                </p>
+                <Button className="w-full rounded-xl bg-primary hover:bg-primary/90 text-sm">En savoir plus</Button>
+              </div>
+            </Link>
+          ) : (
+            <div className="rounded-2xl md:rounded-3xl bg-muted/30 p-5 md:p-6 border border-border">
+              <div className="flex items-center gap-4">
+                <div className="h-12 w-12 rounded-full bg-muted flex items-center justify-center">
+                  <Baby className="h-6 w-6 text-muted-foreground" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-foreground">Développement de bébé</h3>
+                  <p className="text-xs text-muted-foreground">Disponible après configuration</p>
                 </div>
               </div>
-              <p className="text-xs md:text-sm text-foreground/80 mb-3">
-                Votre bébé mesure environ 30 cm et pèse 600g. Ses sens continuent de se développer.
-              </p>
-              <Button className="w-full rounded-xl bg-primary hover:bg-primary/90 text-sm">En savoir plus</Button>
             </div>
-          </Link>
+          )}
         </section>
       </main>
     </div>
