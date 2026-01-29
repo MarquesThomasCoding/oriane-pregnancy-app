@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils"
 import { useCompactMode } from "@/hooks/use-compact-mode"
 import { Button } from "@/components/ui/button"
 import { AuthButton } from "@/components/auth-button"
+import Image from "next/image"
 
 const navItems = [
   {
@@ -186,10 +187,8 @@ export function MobileNav() {
               </button>
 
               {/* Logo au centre */}
-              <Link href="/" className="flex items-center gap-2">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-primary via-tertiary to-secondary shadow-md">
-                  <span className="text-lg font-bold text-white">O</span>
-                </div>
+              <Link href="/" className="flex items-center gap-3">
+                <Image src="/favicon-96x96.png" alt="Oriane Logo" width={44} height={44} className="rounded-2xl" />
               </Link>
 
               {/* Actions à droite */}
