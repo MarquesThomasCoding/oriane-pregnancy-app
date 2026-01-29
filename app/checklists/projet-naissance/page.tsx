@@ -6,7 +6,7 @@ export default async function ProjetNaissancePage() {
   const checklist = await getChecklist("projet-naissance")
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-background to-muted/20 pb-20">
+    <div className="min-h-screen bg-linear-to-b from-background to-muted/20 pt-14 2sm:pt-0 pb-20">
       <Header />
       <main id="main-content" className="container mx-auto px-4 py-6 max-w-4xl space-y-6">
         <ProjetNaissanceChecklistClient checklist={checklist} />

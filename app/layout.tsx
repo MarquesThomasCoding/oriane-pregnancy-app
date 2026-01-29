@@ -56,7 +56,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${inter.variable} ${plusJakarta.variable} font-sans antialiased min-h-screen pb-[calc(80px+env(safe-area-inset-bottom))]`}
+        className={`${inter.variable} ${plusJakarta.variable} font-sans antialiased min-h-screen 2sm:pb-[calc(68px+env(safe-area-inset-bottom))]`}
       >
         {/* Skip to content - premier élément focusable pour l'accessibilité */}
         <a

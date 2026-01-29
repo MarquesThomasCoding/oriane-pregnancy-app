@@ -89,7 +89,7 @@ export default function RecherchePage() {
   const recentSearches = ["Saumon", "Fromage", "Café", "Sushi"]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-secondary/30 via-background to-tertiary/20 pb-20 md:pb-8">
+    <div className="min-h-screen bg-gradient-to-br from-secondary/30 via-background to-tertiary/20 pt-14 2sm:pt-0 pb-20 md:pb-8">
       <Header />
 
       <main className="container px-4 py-6 space-y-6 max-w-6xl mx-auto">

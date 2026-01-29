@@ -89,7 +89,7 @@ export default function AEviterPage() {
   }
 
   return (
-    <div className="min-h-screen pb-20 md:pb-8">
+    <div className="min-h-screen pt-14 2sm:pt-0 pb-20 md:pb-8">
       <Header />
 
       <main className="container px-4 py-6 space-y-6">
