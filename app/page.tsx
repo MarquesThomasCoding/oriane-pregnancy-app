@@ -67,11 +67,11 @@ export default async function HomePage() {
 
       <main id="main-content" className="container px-4 py-6 space-y-6 max-w-6xl mx-auto">
 
-        <div className="flex justify-end -mb-4">
+        {/* <div className="flex justify-end -mb-4">
           <Button size="icon" variant="ghost" className="h-12 w-12 rounded-full bg-primary/10 hover:bg-primary/20">
             <Bell className="h-5 w-5 text-primary" />
           </Button>
-        </div>
+        </div> */}
 
         <section className="animate-slide-up" aria-labelledby="welcome-heading">
           <div className="flex items-center gap-4 md:gap-6">
