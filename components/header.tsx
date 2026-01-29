@@ -35,9 +35,9 @@ export function Header() {
 
         {/* Right actions */}
         <div className="flex items-center gap-1">
-          <Button size="icon" variant="ghost" className="h-11 w-11 rounded-full hover:bg-muted" aria-label="Recherche">
+          {/* <Button size="icon" variant="ghost" className="h-11 w-11 rounded-full hover:bg-muted" aria-label="Recherche">
             <Search className="h-5 w-5" />
-          </Button>
+          </Button> */}
 
           <Button
             variant="ghost"
