@@ -61,7 +61,7 @@ export default function RootLayout({
         {/* Skip to content - premier élément focusable pour l'accessibilité */}
         <a
           href="#main-content"
-          className="fixed top-0 left-0 z-[100] sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg"
+          className="fixed top-0 left-0 z-[100] sr-only focus:not-sr-only focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg"
         >
           Aller au contenu principal
         </a>
