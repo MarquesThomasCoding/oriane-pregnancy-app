@@ -29,6 +29,7 @@ type Appointment = {
 type AppointmentsClientProps = {
   upcoming: Appointment[]
   past: Appointment[]
+  pregnancyDue?: Date | null
 }
 
 const appointmentTypes = [
@@ -39,7 +40,7 @@ const appointmentTypes = [
   { value: 'Autre', label: 'Autre' },
 ]
 
-export function AppointmentsClient({ upcoming, past }: AppointmentsClientProps) {
+export function AppointmentsClient({ upcoming, past, pregnancyDue }: AppointmentsClientProps) {
   const [optimisticUpcoming, setOptimisticUpcoming] = useOptimistic(upcoming)
   const [optimisticPast, setOptimisticPast] = useOptimistic(past)
   const [isAddOpen, setIsAddOpen] = useState(false)
@@ -150,11 +151,31 @@ export function AppointmentsClient({ upcoming, past }: AppointmentsClientProps) 
           className="rounded-md"
           modifiers={{
             hasAppointment: (date) => hasAppointmentOnDate(date),
+            isDueDate: (date) => pregnancyDue ? new Date(pregnancyDue).toDateString() === date.toDateString() : false,
           }}
           modifiersClassNames={{
-            hasAppointment: 'bg-primary/20 font-bold',
+            hasAppointment: 'bg-primary/20 font-bold text-primary',
+            isDueDate: 'bg-tertiary text-tertiary-foreground font-bold rounded-full',
           }}
         />
+
+        {/* Légende du calendrier */}
+        <div className="mt-4 flex flex-wrap gap-4 text-xs text-muted-foreground px-2">
+          <div className="flex items-center gap-2">
+            <div className="h-2 w-2 rounded-full bg-primary/20" />
+            <span>Rendez-vous</span>
+          </div>
+          {pregnancyDue && (
+            <div className="flex items-center gap-2">
+              <div className="h-2 w-2 rounded-full bg-tertiary" />
+              <span>Terme prévu ({new Date(pregnancyDue).toLocaleDateString()})</span>
+            </div>
+          )}
+          <div className="flex items-center gap-2">
+            <div className="h-2 w-2 rounded-full bg-accent" />
+            <span>Aujourd'hui</span>
+          </div>
+        </div>
       </Card>
 
       {/* Bouton Ajouter */}
@@ -376,21 +397,21 @@ export function AppointmentsClient({ upcoming, past }: AppointmentsClientProps) 
                       })}
                     </span>
                   </div>
-                  
+
                   {apt.location && (
                     <p className="text-sm flex items-center gap-1 text-muted-foreground">
                       <MapPin className="h-3 w-3" />
                       {apt.location}
                     </p>
                   )}
-                  
+
                   {apt.doctor && (
                     <p className="text-sm flex items-center gap-1 text-muted-foreground">
                       <User className="h-3 w-3" />
                       {apt.doctor}
                     </p>
                   )}
-                  
+
                   {apt.notes && (
                     <p className="text-sm text-muted-foreground mt-2">{apt.notes}</p>
                   )}
@@ -445,14 +466,14 @@ export function AppointmentsClient({ upcoming, past }: AppointmentsClientProps) 
                       })}
                     </span>
                   </div>
-                  
+
                   {apt.location && (
                     <p className="text-sm flex items-center gap-1 text-muted-foreground">
                       <MapPin className="h-3 w-3" />
                       {apt.location}
                     </p>
                   )}
-                  
+
                   {apt.doctor && (
                     <p className="text-sm flex items-center gap-1 text-muted-foreground">
                       <User className="h-3 w-3" />
